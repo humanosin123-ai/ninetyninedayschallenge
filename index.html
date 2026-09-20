@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>100-Minute Content Race</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #0b0f19; }
+    dialog::backdrop { background: rgba(0, 0, 0, .7); }
+    .bar { transition: width .8s cubic-bezier(.2, .8, .2, 1); }
+  </style>
+  <script src="script.js" defer></script>
+</head>
+<body class="text-slate-200 min-h-screen font-sans">
+
+  <div class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Header -->
+    <header class="flex flex-wrap items-center justify-between gap-3 mb-6">
+      <div>
+        <h1 class="text-3xl font-extrabold tracking-tight">🏁 <span id="goalTitle">100</span>-Minute Content Race</h1>
+        <p id="subtitle" class="text-slate-400 text-sm mt-1"></p>
+      </div>
+      <button id="settingsBtn" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg text-sm font-semibold">⚙ Settings</button>
+    </header>
+
+    <div id="status" class="hidden text-sm rounded-lg px-4 py-2 mb-4"></div>
+    <div id="winner" class="hidden mb-6"></div>
+
+    <!-- Leaderboard -->
+    <section id="board" class="grid gap-4 md:grid-cols-3 mb-10"></section>
+
+    <!-- Feed -->
+    <section>
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+        <h2 class="font-bold text-lg">📼 All content</h2>
+        <select id="flt_person" class="bg-slate-800 rounded-lg px-3 py-1.5 text-sm"></select>
+      </div>
+      <div id="feed" class="space-y-2"></div>
+    </section>
+
+    <footer class="mt-12 text-xs text-slate-600 text-center">
+      Settings and cached data live in your browser (localStorage). Reload the page to re-sync YouTube.
+    </footer>
+  </div>
+
+  <!-- Settings dialog -->
+  <dialog id="settings" class="bg-slate-900 text-slate-200 rounded-2xl p-0 w-full max-w-xl border border-slate-700">
+    <div class="p-6 space-y-5 max-h-[85vh] overflow-y-auto">
+      <div class="flex justify-between items-center">
+        <h3 class="text-xl font-bold">Settings</h3>
+        <button id="closeSettings" class="text-slate-400 hover:text-white text-xl">✕</button>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <label class="text-sm">Goal (minutes)
+          <input id="s_goal" type="number" min="1" class="mt-1 w-full bg-slate-800 rounded-lg px-3 py-2">
+        </label>
+        <label class="text-sm">Challenge start date
+          <input id="s_start" type="date" class="mt-1 w-full bg-slate-800 rounded-lg px-3 py-2">
+          <span class="text-xs text-slate-500">Leave blank to count everything.</span>
+        </label>
+      </div>
+
+      <label class="text-sm block">YouTube Data API v3 key
+        <input id="s_key" type="password" placeholder="AIza..." class="mt-1 w-full bg-slate-800 rounded-lg px-3 py-2">
+        <span class="text-xs text-slate-500">Restrict the key to YouTube Data API v3 and to your site's referrer.</span>
+      </label>
+
+      <div>
+        <p class="text-sm font-semibold mb-2">Participants</p>
+        <div id="s_people" class="space-y-3"></div>
+        <p class="text-xs text-slate-500 mt-2">
+          YouTube channel: an <code>@handle</code>, a channel URL, or a <code>UC…</code> ID. Leave blank if none.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-800">
+        <button id="saveSettings" class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg text-sm font-semibold">Save &amp; sync</button>
+        <button id="exportBtn" class="bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-lg text-sm">Export JSON</button>
+        <label class="bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-lg text-sm cursor-pointer">Import JSON
+          <input id="importFile" type="file" accept="application/json" class="hidden">
+        </label>
+        <button id="demoBtn" class="bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-lg text-sm">Load demo data</button>
+        <button id="clearDemoBtn" class="bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-lg text-sm">Clear demo</button>
+        <button id="resetBtn" class="ml-auto text-red-400 hover:text-red-300 px-3 py-2 text-sm">Reset all</button>
+      </div>
+    </div>
+  </dialog>
+
+</body>
+</html>
