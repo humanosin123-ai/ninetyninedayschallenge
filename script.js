@@ -15,7 +15,7 @@ const CONFIG = {
     apiKey: 'AIzaSyAL814gQzmSGRIc4vhBT3cUl0a9sj6qTp4',
     people: [
       { id: 'p1', name: 'Arnav',    channel: 'HumanOS-s8h' },   // @handle, channel URL or UC… id
-      { id: 'p2', name: 'Yuvraj', channel: '' },
+      { id: 'p2', name: 'Yuvraj', channel: 'Yuvraj19119' },
       { id: 'p3', name: 'Ayaan', channel: '' },
     ],
   },
