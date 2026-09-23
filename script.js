@@ -16,7 +16,7 @@ const CONFIG = {
     people: [
       { id: 'p1', name: 'Arnav',    channel: 'HumanOS-s8h' },   // @handle, channel URL or UC… id
       { id: 'p2', name: 'Yuvraj', channel: 'Yuvraj19119' },
-      { id: 'p3', name: 'Ayaan', channel: '' },
+      { id: 'p3', name: 'Ayaan', channel: 'Triqutra9' },
     ],
   },
 };
@@ -273,10 +273,11 @@ async function fetchUploadIds(playlistId, from) {
 async function fetchVideos(ids) {
   const out = [];
   for (let i = 0; i < ids.length; i += 50) {
-    const res = await ytFetch('videos', { part: 'contentDetails,snippet', id: ids.slice(i, i + 50).join(',') });
+    const res = await ytFetch('videos', { part: 'contentDetails,snippet,liveStreamingDetails', id: ids.slice(i, i + 50).join(',') });
     for (const v of res.items) {
       const seconds = isoToSec(v.contentDetails.duration);
       if (!seconds) continue;                       // live / upcoming: no duration yet
+      if(liveStreamingDetails != {}) continue;
       out.push({
         id: 'yt_' + v.id,
         title: v.snippet.title,
