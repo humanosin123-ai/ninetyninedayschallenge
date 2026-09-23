@@ -277,7 +277,7 @@ async function fetchVideos(ids) {
     for (const v of res.items) {
       const seconds = isoToSec(v.contentDetails.duration);
       if (!seconds) continue;                       // live / upcoming: no duration yet
-      if(liveStreamingDetails != {}) continue;
+      if(v.liveStreamingDetails) continue;
       out.push({
         id: 'yt_' + v.id,
         title: v.snippet.title,
