@@ -2,7 +2,7 @@
 /* QUESTS (leaderboard) + panel. */
 let selId = null, lastStats = null, lastC = null;
 const nf = n => (n == null || isNaN(n)) ? '—' : Number(n).toLocaleString();
-const QICONS = ['💪', '🧠', '🌊'], MEDALS = ['🥇', '🥈', '🥉'];
+const QICONS = ['🌸', '🪨', '🪶'], MEDALS = ['🥇', '🥈', '🥉'];
 
 function renderBoard(stats, c) {
   lastStats = stats; lastC = c;
