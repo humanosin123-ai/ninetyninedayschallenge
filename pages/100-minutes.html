@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>100-Minute Quest</title>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Alegreya:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script src="../js/core/config.js" defer></script><script src="../js/core/utils.js" defer></script><script src="../js/core/state.js" defer></script><script src="../js/data/stats.js" defer></script><script src="../js/render/render-nav.js" defer></script><script src="../js/render/render-archive.js" defer></script><script src="../js/render/render-board.js" defer></script><script src="../js/render/render-feed.js" defer></script><script src="../js/render/render.js" defer></script><script src="../js/data/youtube.js" defer></script><script src="../js/ui/settings.js" defer></script><script src="../js/ui/main.js" defer></script>
+</head>
+<body data-root="../" data-page="m100">
+<div class="wrap">
+  <nav id="tabs" class="tabs"></nav>
+  <main class="book">
+    <div class="head"><div><h1 id="title"></h1><p id="subtitle"></p></div><button id="settingsBtn" class="btn">⚙ Settings</button></div>
+    <div id="phase" class="hidden"></div><div id="status" class="hidden"></div><div id="winner" class="hidden"></div>
+    <div id="live" class="cols">
+      <section><h2>Quests</h2><div id="board"></div></section>
+      <section><h2>Area Map</h2>
+        <div id="feed" class="map"></div></section>
+    </div>
+    <section id="archive" class="hidden"></section>
+  </main>
+  <p class="foot">Settings and cached data live in your browser. YouTube data is cached for 5 minutes.</p>
+</div>
+<dialog id="settings"><div class="dl">
+  <div class="top"><h2 style="margin:0">Settings</h2><button id="closeSettings" class="btn sm">✕</button></div>
+  <div class="g2"><b class="sc" style="grid-column:span 2">⏱ Minutes race</b>
+    <label>Goal (minutes)<input id="s_m500_goal" type="number" min="1" class="in"></label><label>Start date<input id="s_m500_start" type="date" class="in"></label>
+    <b class="sc" style="grid-column:span 2">🎬 Videos race</b>
+    <label>Goal (videos)<input id="s_v30_goal" type="number" min="1" class="in"></label><label>Start date<input id="s_v30_start" type="date" class="in"></label></div>
+  <label>YouTube Data API v3 key<input id="s_key" type="password" placeholder="AIza..." class="in"></label>
+  <div><b class="sc">Participants</b><div id="s_people" style="display:grid;gap:8px;margin-top:6px"></div><small>Channel: an @handle, channel URL, or UC… ID.</small></div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px"><button id="saveSettings" class="btn pri">Save &amp; sync</button><button id="exportBtn" class="btn">Export JSON</button>
+    <label class="btn">Import JSON<input id="importFile" type="file" accept="application/json" class="hidden"></label>
+    <button id="demoBtn" class="btn">Load demo data</button><button id="clearDemoBtn" class="btn">Clear demo</button><button id="resetBtn" class="btn" style="margin-left:auto">Reset all</button></div>
+</div></dialog>
+</body></html>
